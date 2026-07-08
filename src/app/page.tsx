@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BrandWordmark } from "@/components/brand";
-import { GradientOrbs, PulseWave, WeekStrip, LiveDot, WhoopDevice } from "@/components/graphics";
+import { GradientOrbs, PulseWave, WeekStrip, LiveDot } from "@/components/graphics";
+import { Whoop3DLazy } from "@/components/whoop-3d-lazy";
 import { Reveal, Stagger, StaggerItem, SignedCountUp } from "@/components/motion";
 import { RecoveryRing } from "@/components/recovery-ring";
 import { InfoTip } from "@/components/info-tip";
@@ -53,7 +54,7 @@ export default function Home() {
         <section className="mesh-bg relative">
           <GradientOrbs />
           <div className="relative mx-auto max-w-5xl px-6 pb-24 pt-10 sm:pt-14">
-            <div className="grid items-center gap-10 lg:grid-cols-[1fr_15rem]">
+            <div className="grid items-center gap-10 lg:grid-cols-[1fr_18rem]">
               <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                 <Reveal>
                   <Badge variant="outline" className="mb-8 gap-2 border-primary/30 py-1 font-mono text-[0.7rem] text-muted-foreground">
@@ -87,7 +88,7 @@ export default function Home() {
 
               {/* The strap itself, doing its thing */}
               <Reveal delay={0.2} className="hidden justify-center lg:flex">
-                <WhoopDevice className="h-80" />
+                <Whoop3DLazy className="h-[26rem] w-72" />
               </Reveal>
             </div>
 
