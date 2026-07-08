@@ -65,7 +65,7 @@ function LoginForm() {
 
         {/* Auth card */}
         <Reveal delay={0.12} className="mx-auto w-full max-w-sm lg:max-w-none">
-          <Card className="glass card-glow shadow-2xl shadow-black/50">
+          <Card className="glass card-glow shadow-xl shadow-black/10">
             <CardHeader>
               <CardTitle className="font-display text-2xl tracking-tight">Enter the lab</CardTitle>
               <CardDescription>

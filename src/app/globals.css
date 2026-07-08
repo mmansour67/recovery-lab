@@ -50,51 +50,50 @@
 }
 
 /*
- * Recovery Lab "dawn" palette. Recovery happens overnight and shows up in
- * the morning, so the theme is a night sky warming at the horizon: deep
- * navy canvas, warm cream text, sunrise coral as the primary, periwinkle
- * for control/normal day data, and gold for highlights. Recovery scores
- * themselves keep WHOOP's own color language (green/amber/red) via the
- * ring component, so the data reads instantly to a WHOOP user.
+ * Recovery Lab "field notes" palette. A printed lab journal: warm paper
+ * background, ink black type, terracotta as the primary ink, deep teal for
+ * normal day data, gold for highlights. Recovery scores keep WHOOP's own
+ * color language (green/amber/red, darkened for light background contrast)
+ * via the ring component, so the data reads instantly to a WHOOP user.
  */
 :root {
-  --background: oklch(0.165 0.038 262);
-  --foreground: oklch(0.94 0.018 85);
-  --card: oklch(0.205 0.042 262);
-  --card-foreground: oklch(0.94 0.018 85);
-  --popover: oklch(0.23 0.044 262);
-  --popover-foreground: oklch(0.94 0.018 85);
-  --primary: oklch(0.73 0.16 38);
-  --primary-foreground: oklch(0.18 0.045 38);
-  --secondary: oklch(0.265 0.045 262);
-  --secondary-foreground: oklch(0.94 0.018 85);
-  --muted: oklch(0.25 0.04 262);
-  --muted-foreground: oklch(0.7 0.028 75);
-  --accent: oklch(0.28 0.05 285);
-  --accent-foreground: oklch(0.94 0.018 85);
-  --destructive: oklch(0.64 0.2 25);
-  --border: oklch(0.94 0.018 85 / 11%);
-  --input: oklch(0.94 0.018 85 / 14%);
-  --ring: oklch(0.66 0.13 38);
-  --chart-1: oklch(0.73 0.16 38);
-  --chart-2: oklch(0.68 0.085 262);
-  --chart-3: oklch(0.82 0.13 85);
-  --chart-4: oklch(0.7 0.14 300);
-  --chart-5: oklch(0.78 0.16 155);
+  --background: oklch(0.975 0.009 85);
+  --foreground: oklch(0.24 0.012 60);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.012 60);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.012 60);
+  --primary: oklch(0.55 0.14 35);
+  --primary-foreground: oklch(0.98 0.008 85);
+  --secondary: oklch(0.93 0.012 80);
+  --secondary-foreground: oklch(0.3 0.012 60);
+  --muted: oklch(0.93 0.012 80);
+  --muted-foreground: oklch(0.49 0.015 60);
+  --accent: oklch(0.92 0.022 190);
+  --accent-foreground: oklch(0.32 0.05 195);
+  --destructive: oklch(0.55 0.19 25);
+  --border: oklch(0.24 0.012 60 / 13%);
+  --input: oklch(0.24 0.012 60 / 16%);
+  --ring: oklch(0.55 0.14 35);
+  --chart-1: oklch(0.55 0.14 35);
+  --chart-2: oklch(0.48 0.085 195);
+  --chart-3: oklch(0.7 0.12 85);
+  --chart-4: oklch(0.55 0.14 300);
+  --chart-5: oklch(0.55 0.15 155);
   --radius: 0.8rem;
-  --sidebar: oklch(0.205 0.042 262);
-  --sidebar-foreground: oklch(0.94 0.018 85);
-  --sidebar-primary: oklch(0.73 0.16 38);
-  --sidebar-primary-foreground: oklch(0.18 0.045 38);
-  --sidebar-accent: oklch(0.28 0.05 285);
-  --sidebar-accent-foreground: oklch(0.94 0.018 85);
-  --sidebar-border: oklch(0.94 0.018 85 / 11%);
-  --sidebar-ring: oklch(0.66 0.13 38);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.24 0.012 60);
+  --sidebar-primary: oklch(0.55 0.14 35);
+  --sidebar-primary-foreground: oklch(0.98 0.008 85);
+  --sidebar-accent: oklch(0.92 0.022 190);
+  --sidebar-accent-foreground: oklch(0.32 0.05 195);
+  --sidebar-border: oklch(0.24 0.012 60 / 13%);
+  --sidebar-ring: oklch(0.55 0.14 35);
 
-  /* WHOOP score colors, used only by the recovery ring + score displays */
-  --score-high: oklch(0.78 0.17 155);
-  --score-mid: oklch(0.83 0.15 90);
-  --score-low: oklch(0.64 0.2 25);
+  /* WHOOP score colors (darkened to hold contrast on paper) */
+  --score-high: oklch(0.58 0.15 155);
+  --score-mid: oklch(0.68 0.13 85);
+  --score-low: oklch(0.55 0.19 25);
 }
 
 @layer base {
@@ -103,13 +102,13 @@
   }
   html {
     @apply font-sans;
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
     @apply bg-background text-foreground;
   }
   ::selection {
-    background: oklch(0.73 0.16 38 / 35%);
+    background: oklch(0.55 0.14 35 / 22%);
   }
 }
 
@@ -144,6 +143,16 @@
   to { transform: translateX(200%); }
 }
 
+@keyframes float-y {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-10px) rotate(1.5deg); }
+}
+
+@keyframes led-ripple {
+  0% { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
 @keyframes rise-fade {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
@@ -152,21 +161,21 @@
 /* ---------- utilities ---------- */
 
 @utility glass {
-  background: oklch(0.205 0.042 262 / 72%);
+  background: oklch(1 0 0 / 78%);
   backdrop-filter: blur(14px);
-  border: 1px solid oklch(0.94 0.018 85 / 10%);
+  border: 1px solid oklch(0.24 0.012 60 / 10%);
 }
 
 @utility mesh-bg {
   background:
-    radial-gradient(48rem 26rem at 18% -8%, oklch(0.73 0.16 38 / 0.13), transparent 65%),
-    radial-gradient(44rem 24rem at 88% 2%, oklch(0.68 0.085 262 / 0.16), transparent 65%),
-    radial-gradient(36rem 22rem at 55% 112%, oklch(0.82 0.13 85 / 0.07), transparent 70%);
+    radial-gradient(48rem 26rem at 18% -8%, oklch(0.55 0.14 35 / 0.09), transparent 65%),
+    radial-gradient(44rem 24rem at 88% 2%, oklch(0.48 0.085 195 / 0.1), transparent 65%),
+    radial-gradient(36rem 22rem at 55% 112%, oklch(0.7 0.12 85 / 0.08), transparent 70%);
 }
 
 @utility card-glow {
   background:
-    linear-gradient(to bottom, oklch(0.73 0.16 38 / 0.08), transparent 48%),
+    linear-gradient(to bottom, oklch(0.55 0.14 35 / 0.06), transparent 48%),
     var(--card);
 }
 
