@@ -1,0 +1,281 @@
+// Recovery Lab — N-of-1 wellness experimentation platform
+// See project spec for full rationale behind each table.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ExperimentStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+  ABANDONED
+}
+
+enum PrimaryMetric {
+  RECOVERY_SCORE
+}
+
+enum Condition {
+  INTERVENTION
+  CONTROL
+}
+
+enum ValidityStatus {
+  PENDING
+  VALID
+  INVALID
+  MISSING_CHECKIN
+  MISSING_WHOOP_DATA
+}
+
+enum Adherence {
+  YES
+  PARTIAL
+  NO
+}
+
+enum ScoreState {
+  SCORED
+  PENDING_SCORE
+  UNSCORABLE
+}
+
+enum WebhookEventType {
+  SLEEP_UPDATED
+  SLEEP_DELETED
+  RECOVERY_UPDATED
+  RECOVERY_DELETED
+  WORKOUT_UPDATED
+  WORKOUT_DELETED
+}
+
+enum WebhookStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum ConfidenceLabel {
+  INSUFFICIENT
+  LOW
+  MODERATE
+  HIGHER
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  timezone  String   @default("UTC")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  whoopConnection WhoopConnection?
+  experiments     Experiment[]
+  whoopCycles     WhoopCycle[]
+  whoopSleeps     WhoopSleep[]
+  whoopRecoveries WhoopRecovery[]
+
+  @@map("users")
+}
+
+model WhoopConnection {
+  id                    String    @id @default(uuid())
+  userId                String    @unique @map("user_id")
+  whoopUserId           String    @unique @map("whoop_user_id")
+  accessTokenEncrypted  String    @map("access_token_encrypted")
+  refreshTokenEncrypted String    @map("refresh_token_encrypted")
+  tokenExpiresAt        DateTime  @map("token_expires_at")
+  grantedScopes         String[]  @map("granted_scopes")
+  connectedAt           DateTime  @default(now()) @map("connected_at")
+  lastSuccessfulSyncAt  DateTime? @map("last_successful_sync_at")
+  revokedAt             DateTime? @map("revoked_at")
+  refreshLockedAt       DateTime? @map("refresh_locked_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("whoop_connections")
+}
+
+model Experiment {
+  id                       String           @id @default(uuid())
+  userId                   String           @map("user_id")
+  title                    String
+  hypothesis               String
+  interventionInstructions String           @map("intervention_instructions")
+  controlInstructions      String           @map("control_instructions")
+  primaryMetric            PrimaryMetric    @default(RECOVERY_SCORE) @map("primary_metric")
+  startDate                DateTime         @map("start_date") @db.Date
+  endDate                  DateTime         @map("end_date") @db.Date
+  status                   ExperimentStatus @default(DRAFT)
+  randomizationSeed        String           @map("randomization_seed")
+  analysisVersion          Int              @default(1) @map("analysis_version")
+  createdAt                DateTime         @default(now()) @map("created_at")
+  updatedAt                DateTime         @updatedAt @map("updated_at")
+
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  experimentDays ExperimentDay[]
+  analysisRuns   AnalysisRun[]
+
+  @@index([userId, status])
+  @@map("experiments")
+}
+
+model ExperimentDay {
+  id                String         @id @default(uuid())
+  experimentId      String         @map("experiment_id")
+  localDate         DateTime       @map("local_date") @db.Date
+  assignedCondition Condition      @map("assigned_condition")
+  mainSleepId       String?        @map("main_sleep_id")
+  recoveryId        String?        @map("recovery_id")
+  validityStatus    ValidityStatus @default(PENDING) @map("validity_status")
+  invalidReason     String?        @map("invalid_reason")
+  createdAt         DateTime       @default(now()) @map("created_at")
+
+  experiment Experiment     @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+  mainSleep  WhoopSleep?    @relation(fields: [mainSleepId], references: [id])
+  recovery   WhoopRecovery? @relation(fields: [recoveryId], references: [id])
+  checkin    DailyCheckin?
+
+  @@unique([experimentId, localDate])
+  @@index([experimentId])
+  @@map("experiment_days")
+}
+
+model DailyCheckin {
+  id               String    @id @default(uuid())
+  experimentDayId  String    @unique @map("experiment_day_id")
+  adherence        Adherence
+  unusualDay       Boolean   @default(false) @map("unusual_day")
+  unusualDayReason String?   @map("unusual_day_reason")
+  subjectiveEnergy Int?      @map("subjective_energy")
+  notes            String?
+  submittedAt      DateTime  @default(now()) @map("submitted_at")
+
+  experimentDay ExperimentDay @relation(fields: [experimentDayId], references: [id], onDelete: Cascade)
+
+  @@map("daily_checkins")
+}
+
+model WhoopCycle {
+  id               String     @id @default(uuid())
+  whoopCycleId     String     @unique @map("whoop_cycle_id")
+  userId           String     @map("user_id")
+  startTime        DateTime   @map("start_time")
+  endTime          DateTime?  @map("end_time")
+  timezoneOffset   String     @map("timezone_offset")
+  scoreState       ScoreState @map("score_state")
+  dayStrain        Float?     @map("day_strain")
+  averageHeartRate Int?       @map("average_heart_rate")
+  maxHeartRate     Int?       @map("max_heart_rate")
+  rawPayload       Json       @map("raw_payload")
+  updatedAt        DateTime   @updatedAt @map("updated_at")
+
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sleeps     WhoopSleep[]
+  recoveries WhoopRecovery[]
+
+  @@index([userId, startTime])
+  @@map("whoop_cycles")
+}
+
+model WhoopSleep {
+  id                   String     @id @default(uuid())
+  whoopSleepId         String     @unique @map("whoop_sleep_id")
+  userId               String     @map("user_id")
+  whoopCycleId         String?    @map("whoop_cycle_id")
+  startTime            DateTime   @map("start_time")
+  endTime              DateTime   @map("end_time")
+  timezoneOffset       String     @map("timezone_offset")
+  isNap                Boolean    @default(false) @map("is_nap")
+  scoreState           ScoreState @map("score_state")
+  totalInBedMs         Int?       @map("total_in_bed_ms")
+  totalAwakeMs         Int?       @map("total_awake_ms")
+  totalLightSleepMs    Int?       @map("total_light_sleep_ms")
+  totalSlowWaveSleepMs Int?       @map("total_slow_wave_sleep_ms")
+  totalRemSleepMs      Int?       @map("total_rem_sleep_ms")
+  sleepPerformance     Float?     @map("sleep_performance")
+  sleepConsistency     Float?     @map("sleep_consistency")
+  sleepEfficiency      Float?     @map("sleep_efficiency")
+  rawPayload           Json       @map("raw_payload")
+  updatedAt            DateTime   @updatedAt @map("updated_at")
+  deletedAt            DateTime?  @map("deleted_at")
+
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cycle          WhoopCycle?      @relation(fields: [whoopCycleId], references: [id])
+  recovery       WhoopRecovery?
+  experimentDays ExperimentDay[]
+
+  @@index([userId, startTime])
+  @@map("whoop_sleeps")
+}
+
+model WhoopRecovery {
+  id                     String     @id @default(uuid())
+  whoopRecoveryId        String     @unique @map("whoop_recovery_id")
+  userId                 String     @map("user_id")
+  whoopCycleId           String?    @map("whoop_cycle_id")
+  whoopSleepId           String?    @unique @map("whoop_sleep_id")
+  scoreState             ScoreState @map("score_state")
+  userCalibrating        Boolean    @default(false) @map("user_calibrating")
+  recoveryScore          Int?       @map("recovery_score")
+  restingHeartRate       Int?       @map("resting_heart_rate")
+  hrvRmssdMs             Float?     @map("hrv_rmssd_ms")
+  spo2Percentage         Float?     @map("spo2_percentage")
+  skinTemperatureCelsius Float?     @map("skin_temperature_celsius")
+  rawPayload             Json       @map("raw_payload")
+  updatedAt              DateTime   @updatedAt @map("updated_at")
+  deletedAt              DateTime?  @map("deleted_at")
+
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cycle          WhoopCycle?      @relation(fields: [whoopCycleId], references: [id])
+  sleep          WhoopSleep?      @relation(fields: [whoopSleepId], references: [id])
+  experimentDays ExperimentDay[]
+
+  @@index([userId])
+  @@map("whoop_recoveries")
+}
+
+model WebhookEvent {
+  id           String           @id @default(uuid())
+  traceId      String           @unique @map("trace_id")
+  whoopUserId  String           @map("whoop_user_id")
+  objectId     String           @map("object_id")
+  eventType    WebhookEventType @map("event_type")
+  status       WebhookStatus    @default(PENDING)
+  attemptCount Int              @default(0) @map("attempt_count")
+  receivedAt   DateTime         @default(now()) @map("received_at")
+  processedAt  DateTime?        @map("processed_at")
+  lastError    String?          @map("last_error")
+
+  @@index([status])
+  @@map("webhook_events")
+}
+
+model AnalysisRun {
+  id                     String          @id @default(uuid())
+  experimentId           String          @map("experiment_id")
+  analysisVersion        Int             @map("analysis_version")
+  validDayCount          Int             @map("valid_day_count")
+  interventionDayCount   Int             @map("intervention_day_count")
+  controlDayCount        Int             @map("control_day_count")
+  adherenceRate          Float           @map("adherence_rate")
+  unadjustedEffect       Float           @map("unadjusted_effect")
+  adjustedEffect         Float?          @map("adjusted_effect")
+  confidenceIntervalLow  Float           @map("confidence_interval_low")
+  confidenceIntervalHigh Float           @map("confidence_interval_high")
+  confidenceLabel        ConfidenceLabel @map("confidence_label")
+  resultPayload          Json            @map("result_payload")
+  createdAt              DateTime        @default(now()) @map("created_at")
+
+  experiment Experiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+
+  @@index([experimentId])
+  @@map("analysis_runs")
+}
