@@ -12,21 +12,21 @@ export function GradientOrbs({ className }: { className?: string }) {
       <div
         className="absolute -top-24 left-[8%] size-[26rem] rounded-full opacity-60 blur-3xl"
         style={{
-          background: "radial-gradient(circle, oklch(0.84 0.17 163 / 0.16), transparent 70%)",
+          background: "radial-gradient(circle, oklch(0.73 0.16 38 / 0.2), transparent 70%)",
           animation: "drift-a 26s ease-in-out infinite",
         }}
       />
       <div
         className="absolute -top-10 right-[4%] size-[22rem] rounded-full opacity-60 blur-3xl"
         style={{
-          background: "radial-gradient(circle, oklch(0.7 0.14 300 / 0.18), transparent 70%)",
+          background: "radial-gradient(circle, oklch(0.68 0.085 262 / 0.24), transparent 70%)",
           animation: "drift-b 32s ease-in-out infinite",
         }}
       />
       <div
         className="absolute bottom-[-8rem] left-[38%] size-96 rounded-full opacity-40 blur-3xl"
         style={{
-          background: "radial-gradient(circle, oklch(0.74 0.15 40 / 0.13), transparent 70%)",
+          background: "radial-gradient(circle, oklch(0.82 0.13 85 / 0.14), transparent 70%)",
           animation: "drift-a 38s ease-in-out infinite reverse",
         }}
       />

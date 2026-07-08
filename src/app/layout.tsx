@@ -21,9 +21,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Recovery Lab — run the experiment on yourself",
+  title: "Recovery Lab · run the experiment on yourself",
   description:
-    "Turn one daily habit into a proper randomized experiment, scored by your own WHOOP recovery data. Straight answers, including 'too early to tell.'",
+    "Turn one daily habit into a real randomized experiment, scored by your own WHOOP recovery data. Straight answers, including that it might be too early to tell.",
 };
 
 export default function RootLayout({

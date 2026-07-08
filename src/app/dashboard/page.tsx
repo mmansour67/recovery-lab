@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { GradientOrbs, LiveDot, PulseWave, WeekStrip } from "@/components/graphics";
 import { AnimatedBar, Reveal } from "@/components/motion";
+import { RecoveryRing } from "@/components/recovery-ring";
 import { InfoTip } from "@/components/info-tip";
 
 const PRESET_CHIPS = [
@@ -50,27 +51,30 @@ export default async function DashboardPage() {
                 Wire up the <span className="italic text-primary">measurement</span>
               </CardTitle>
               <CardDescription className="max-w-prose leading-relaxed">
-                Your WHOOP recovery score is what the experiment measures. Recovery Lab asks for read-only
-                access to three things, and nothing else:
+                Your WHOOP recovery score is what the experiment measures. Recovery Lab asks to read three
+                things, and nothing else:
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col items-start gap-6">
-              <ul className="grid gap-2.5 text-sm text-muted-foreground">
-                <li className="flex gap-3">
-                  <span className="font-mono text-xs text-primary/80 pt-0.5 w-20 shrink-0">recovery</span>
-                  score, HRV, resting heart rate — the outcome being tested
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-mono text-xs text-primary/80 pt-0.5 w-20 shrink-0">sleep</span>
-                  timing and performance — to match each night to the right day
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-mono text-xs text-primary/80 pt-0.5 w-20 shrink-0">strain</span>
-                  daily load — so a brutal workout doesn&apos;t masquerade as a bad habit
-                </li>
-              </ul>
+            <CardContent className="flex flex-col gap-6">
+              <div className="flex flex-wrap items-center gap-8">
+                <RecoveryRing score={74} size={140} />
+                <ul className="grid min-w-52 flex-1 gap-2.5 text-sm text-muted-foreground">
+                  <li className="flex gap-3">
+                    <span className="font-mono text-xs text-primary/80 pt-0.5 w-20 shrink-0">recovery</span>
+                    score, HRV, resting heart rate. This is the outcome being tested
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-mono text-xs text-primary/80 pt-0.5 w-20 shrink-0">sleep</span>
+                    timing and performance, so each night lands on the right day
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-mono text-xs text-primary/80 pt-0.5 w-20 shrink-0">strain</span>
+                    daily load, so a brutal workout doesn&apos;t masquerade as a bad habit
+                  </li>
+                </ul>
+              </div>
               <PulseWave className="h-9 w-full max-w-sm opacity-50" />
-              <Button size="lg" render={<Link href="/api/whoop/connect">Connect WHOOP</Link>} />
+              <Button size="lg" className="self-start" render={<Link href="/api/whoop/connect">Connect WHOOP</Link>} />
             </CardContent>
           </Card>
         </div>
@@ -93,7 +97,7 @@ export default async function DashboardPage() {
                   Pick your first <span className="italic text-primary">hypothesis</span>
                 </CardTitle>
                 <CardDescription className="max-w-prose leading-relaxed">
-                  One habit, 14–42 days. Chance splits the days between habit and normal, your recovery does
+                  One habit, 14 to 42 days. Chance splits the days between habit and normal, your recovery does
                   the scoring, and at the end you get a number you can actually stand behind.
                 </CardDescription>
               </CardHeader>
@@ -169,7 +173,7 @@ export default async function DashboardPage() {
                 day {dayNumber} <span className="text-muted-foreground/60">/ {totalDays}</span>
               </span>
               <span className="inline-flex items-center gap-1.5 font-mono">
-                {checkedInCount}/{elapsedDays.length} check-ins
+                {checkedInCount}/{elapsedDays.length} days logged
                 <InfoTip term="checkinRate" />
               </span>
               <Button
@@ -189,7 +193,7 @@ export default async function DashboardPage() {
       ) : (
         <Card>
           <CardContent className="py-10 text-center text-sm text-muted-foreground">
-            Nothing assigned for today — the experiment either hasn&apos;t started yet or just wrapped. Check
+            Nothing assigned for today. The experiment either hasn&apos;t started yet or just wrapped. Check
             the report for where things stand.
           </CardContent>
         </Card>

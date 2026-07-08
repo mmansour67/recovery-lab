@@ -67,13 +67,13 @@ export default async function ExperimentResultsPage({
                 <RecoveryChart data={results.chartData} />
                 <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
                   Each dot is one valid night&apos;s recovery score, colored by what that day was assigned.
-                  The dashed lines are each condition&apos;s average — the gap between them is your result.
+                  The dashed lines are each condition&apos;s average, and the gap between them is your result.
                 </p>
               </>
             ) : (
               <p className="py-10 text-center text-sm leading-relaxed text-muted-foreground">
-                No valid nights on the board yet. A night shows up here once you&apos;ve checked in for the
-                day, WHOOP has scored the sleep, and nothing unusual was flagged — usually the morning after.
+                No valid nights on the board yet. A night shows up here once you&apos;ve logged the day, WHOOP
+                has scored the sleep, and nothing unusual was flagged. Usually that means the next morning.
               </p>
             )}
           </CardContent>

@@ -47,7 +47,7 @@ function LoginForm() {
 
           <p className="mt-6 max-w-md text-pretty leading-relaxed text-muted-foreground max-lg:mx-auto">
             Yours might be the afternoon coffee, or the phone on the nightstand. Pick one habit, let
-            chance assign the days, and let your WHOOP data do the talking — even when it says
+            chance assign the days, and let your WHOOP data do the talking, even when what it says is
             &ldquo;too early to tell.&rdquo;
           </p>
 
@@ -56,7 +56,7 @@ function LoginForm() {
             <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
               One week, randomized
               <InfoTip term="randomized" />
-              &middot; mint days are habit days
+              &middot; the warm days are habit days
             </p>
           </div>
 
@@ -76,7 +76,7 @@ function LoginForm() {
               {checkEmail && (
                 <Alert className="mb-4 border-primary/30">
                   <AlertDescription>
-                    Almost there — confirm the address we just emailed you, then sign in below.
+                    Almost there. Confirm the address we just emailed you, then sign in below.
                   </AlertDescription>
                 </Alert>
               )}
@@ -152,7 +152,7 @@ function LoginForm() {
                       {signUpPending ? "Setting things up…" : "Create account"}
                     </Button>
                     <p className="text-xs leading-relaxed text-muted-foreground">
-                      We read your timezone from the browser, so &ldquo;today&rdquo; means your today —
+                      We read your timezone from the browser, so &ldquo;today&rdquo; means your today, and
                       day boundaries land at your midnight, not ours.
                     </p>
                   </form>

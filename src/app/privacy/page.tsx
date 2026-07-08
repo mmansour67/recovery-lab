@@ -3,28 +3,28 @@ import { Button } from "@/components/ui/button";
 import { BrandWordmark } from "@/components/brand";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 
-export const metadata = { title: "Privacy — Recovery Lab" };
+export const metadata = { title: "Privacy · Recovery Lab" };
 
 const SECTIONS: { index: string; title: string; body: string }[] = [
   {
     index: "01",
     title: "What we store",
-    body: "Your email and timezone, the experiments you create, your daily check-ins, and the WHOOP recovery, sleep, and cycle records needed to score them. WHOOP tokens are encrypted at rest and never show up in logs. That's the whole inventory.",
+    body: "Your email and timezone, the experiments you create, your daily logs, and the WHOOP recovery, sleep, and cycle records needed to score them. WHOOP tokens are encrypted at rest and never show up in logs. That's the whole inventory.",
   },
   {
     index: "02",
     title: "What we read from WHOOP",
-    body: "Recovery, sleep, cycles, and your basic profile — read-only, and only because the analysis needs them. We don't ask for workouts or body measurements, because we don't use them.",
+    body: "Recovery, sleep, cycles, and your basic profile. Read access only, and only because the analysis needs them. We don't ask for workouts or body measurements, because we don't use them.",
   },
   {
     index: "03",
     title: "What we'll never do",
-    body: "Sell your health data. Share it with advertisers. Turn a recovery score into a diagnosis. Recovery Lab is a wellness experimentation tool — it reports what your data shows about one habit, and stops there.",
+    body: "Sell your health data. Share it with advertisers. Turn a recovery score into a diagnosis. Recovery Lab reports what your data shows about one habit, then it stops.",
   },
   {
     index: "04",
     title: "Your exits",
-    body: "Disconnect WHOOP any time (we revoke our own API access when you do). Download everything we hold about you as one JSON file. Or delete the account, which removes it all — experiments, check-ins, synced records — permanently.",
+    body: "Disconnect WHOOP any time, and we revoke our own API access when you do. Download everything we hold about you as one JSON file. Or delete the account, which permanently removes it all: experiments, daily logs, synced records.",
   },
 ];
 

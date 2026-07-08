@@ -4,38 +4,39 @@ import { Badge } from "@/components/ui/badge";
 import { BrandWordmark } from "@/components/brand";
 import { GradientOrbs, PulseWave, WeekStrip, LiveDot } from "@/components/graphics";
 import { Reveal, Stagger, StaggerItem, SignedCountUp } from "@/components/motion";
+import { RecoveryRing } from "@/components/recovery-ring";
 import { InfoTip } from "@/components/info-tip";
 
 const STEPS = [
   {
     number: "01",
     title: "Link your WHOOP",
-    body: "Read-only. Recovery, sleep, and strain — the three numbers the analysis needs. Disconnect whenever you like.",
+    body: "We read three things and nothing else: recovery, sleep, and strain. You can pull the plug whenever you want.",
   },
   {
     number: "02",
-    title: "Follow today's card",
-    body: "Each morning you get one instruction: habit day or normal day. Chance picks which, and you never see tomorrow's — so you can't plan around it.",
+    title: "Follow the card each morning",
+    body: "Every day you get one instruction. Habit day or normal day. Chance picks which, and tomorrow stays hidden, so you can't plan around it.",
   },
   {
     number: "03",
     title: "Read the verdict",
-    body: "A number, a range, and how much weight it can hold. Sometimes the verdict is “too early to tell.” We'll say that too.",
+    body: "A number, a range, and how much weight it can hold. Sometimes the verdict is that it's too early to tell. We'll say that too.",
   },
 ];
 
 const TRUST = [
   {
     title: "Chance runs the schedule",
-    body: "You don't pick which days are habit days — a seeded random draw does. That's the difference between an experiment and a diary.",
+    body: "You don't choose which days are habit days. A random draw does. That single detail is what separates an experiment from a diary.",
   },
   {
     title: "The uncertainty is the headline",
-    body: "Every estimate ships with its interval and its valid-day count. If the range still includes zero, the app says so instead of rounding up to a success story.",
+    body: "Every estimate ships with its range and its valid day count. When the range still includes zero, the app says so instead of rounding up to a success story.",
   },
   {
     title: "It's not a doctor",
-    body: "Recovery Lab reports what your data shows about one habit. It doesn't diagnose, treat, or nudge you toward supplements.",
+    body: "Recovery Lab reports what your data shows about one habit, then stops. No diagnoses, no supplement funnels, no scare copy.",
   },
 ];
 
@@ -51,11 +52,11 @@ export default function Home() {
         {/* Hero */}
         <section className="mesh-bg relative">
           <GradientOrbs />
-          <div className="relative mx-auto flex max-w-5xl flex-col items-center px-6 pb-24 pt-16 text-center sm:pt-24">
+          <div className="relative mx-auto flex max-w-5xl flex-col items-center px-6 pb-24 pt-14 text-center sm:pt-20">
             <Reveal>
               <Badge variant="outline" className="mb-8 gap-2 border-primary/30 py-1 font-mono text-[0.7rem] text-muted-foreground">
                 <LiveDot />
-                n = 1 · your data, your experiment
+                n = 1 · your data, your call
               </Badge>
             </Reveal>
 
@@ -69,8 +70,8 @@ export default function Home() {
 
             <Reveal delay={0.16}>
               <p className="mt-7 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-                Recovery Lab turns one habit into a proper randomized experiment. Some days you do it, some
-                days you don&apos;t — chance decides which. After a few weeks, your WHOOP data tells you
+                Recovery Lab turns one habit into a real randomized experiment. Some days you do it, some
+                days you don&apos;t, and chance decides which. After a few weeks your WHOOP data tells you
                 whether it actually mattered.
               </p>
             </Reveal>
@@ -82,7 +83,7 @@ export default function Home() {
               </div>
             </Reveal>
 
-            {/* Example result card — the product's actual voice */}
+            {/* Example result card */}
             <Reveal delay={0.34} className="mt-16 w-full max-w-2xl">
               <div className="glass card-glow rounded-2xl p-6 text-left shadow-2xl shadow-black/50 sm:p-8">
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -95,40 +96,45 @@ export default function Home() {
                   </span>
                 </div>
 
-                <div className="mt-6 flex items-end gap-4">
-                  <SignedCountUp
-                    value={7.4}
-                    className="font-mono text-6xl font-semibold tracking-tight text-primary"
-                  />
-                  <span className="pb-1.5 text-sm leading-snug text-muted-foreground">
-                    points of next-morning recovery,
-                    <br />
-                    habit days vs. normal days
-                  </span>
+                <div className="mt-6 flex flex-wrap items-center gap-8">
+                  <RecoveryRing score={74} size={150} />
+                  <div className="min-w-52 flex-1">
+                    <div className="flex items-end gap-3">
+                      <SignedCountUp
+                        value={7.4}
+                        className="font-mono text-5xl font-semibold tracking-tight text-primary"
+                      />
+                      <span className="pb-1 text-sm leading-snug text-muted-foreground">
+                        points of morning recovery,
+                        <br />
+                        habit days vs. normal days
+                      </span>
+                    </div>
+
+                    {/* interval bar */}
+                    <div className="mt-6">
+                      <div className="relative h-2 rounded-full bg-muted">
+                        <div className="absolute inset-y-0 left-[22%] right-[8%] rounded-full bg-primary/35" />
+                        <div className="absolute -inset-y-0.5 left-[52%] w-1 -translate-x-1/2 rounded-full bg-primary" />
+                        <div className="absolute -inset-y-1.5 left-[29%] w-px bg-foreground/30" />
+                      </div>
+                      <div className="mt-2 flex items-center justify-between font-mono text-xs text-muted-foreground">
+                        <span>−1.8</span>
+                        <span className="inline-flex items-center gap-1.5">
+                          95% interval
+                          <InfoTip term="interval" />
+                        </span>
+                        <span>+16.6</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                {/* interval bar */}
-                <div className="mt-7">
-                  <div className="relative h-2 rounded-full bg-muted">
-                    <div className="absolute inset-y-0 left-[22%] right-[8%] rounded-full bg-primary/35" />
-                    <div className="absolute -inset-y-0.5 left-[52%] w-1 -translate-x-1/2 rounded-full bg-primary" />
-                    <div className="absolute -inset-y-1.5 left-[29%] w-px bg-foreground/30" />
-                  </div>
-                  <div className="mt-2 flex items-center justify-between font-mono text-xs text-muted-foreground">
-                    <span>−1.8</span>
-                    <span className="inline-flex items-center gap-1.5">
-                      95% interval
-                      <InfoTip term="interval" />
-                    </span>
-                    <span>+16.6</span>
-                  </div>
-                </div>
-
-                <PulseWave className="mt-7 h-10 opacity-60" />
+                <PulseWave className="mt-7 h-9 opacity-50" />
 
                 <p className="mt-5 border-t pt-5 text-sm leading-relaxed text-muted-foreground">
-                  Promising — but that range still includes zero, so &ldquo;no effect&rdquo; hasn&apos;t been
-                  ruled out. <span className="text-foreground">The app tells you that instead of hiding it.</span>
+                  Promising, but that range still includes zero, so no effect at all hasn&apos;t been ruled
+                  out. <span className="text-foreground">The app tells you that up front instead of burying it.</span>
                 </p>
               </div>
             </Reveal>
@@ -155,7 +161,7 @@ export default function Home() {
                       <div className="mt-5 space-y-2">
                         <WeekStrip />
                         <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                          a randomized week
+                          one randomized week
                           <InfoTip term="randomized" />
                         </p>
                       </div>
@@ -205,8 +211,8 @@ export default function Home() {
       <footer className="border-t">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-10 text-center text-xs text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
           <p>
-            Recovery Lab is a general wellness tool. It doesn&apos;t diagnose, treat, or provide medical
-            advice — it just runs the numbers on your habits.
+            Recovery Lab is a general wellness tool. It doesn&apos;t diagnose or treat anything. It just runs
+            the numbers on your habits.
           </p>
           <Link href="/privacy" className="shrink-0 underline-offset-4 hover:underline">
             Privacy

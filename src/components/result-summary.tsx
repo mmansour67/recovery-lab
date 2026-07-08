@@ -96,7 +96,7 @@ export function ResultSummary({ results }: { results: ExperimentResults }) {
                 )}
               />
               <span className="pb-2.5 text-sm leading-snug text-muted-foreground">
-                points of next-morning recovery,
+                points of morning recovery,
                 <br />
                 habit days vs. normal days
               </span>
@@ -133,13 +133,13 @@ export function ResultSummary({ results }: { results: ExperimentResults }) {
               <div className="mt-2 flex items-center justify-between font-mono text-xs text-muted-foreground">
                 <span>{formatSigned(results.confidenceIntervalLow)}</span>
                 <span className="inline-flex items-center gap-1.5">
-                  95% interval · the tick is zero <InfoTip term="interval" />
+                  95% interval, and the tick marks zero <InfoTip term="interval" />
                 </span>
                 <span>{formatSigned(results.confidenceIntervalHigh)}</span>
               </div>
               {includesZero && results.validDayCount > 0 && (
                 <p className="mt-2 text-xs text-muted-foreground">
-                  The range still crosses zero — &ldquo;no effect&rdquo; hasn&apos;t been ruled out yet.
+                  The range still crosses zero, so no effect at all hasn&apos;t been ruled out yet.
                 </p>
               )}
             </div>
@@ -172,7 +172,7 @@ export function ResultSummary({ results }: { results: ExperimentResults }) {
                   {results.adjustedEffect !== null ? (
                     <SignedCountUp value={results.adjustedEffect} />
                   ) : (
-                    <span className="text-muted-foreground/60">—</span>
+                    <span className="text-muted-foreground/60">·</span>
                   )}
                 </p>
               </div>
@@ -206,7 +206,7 @@ export function ResultSummary({ results }: { results: ExperimentResults }) {
                 <p>
                   <span className="font-medium text-foreground">By what you actually did: </span>
                   recovery ran {formatSigned(results.adherenceComparison.effect)} points different on days you
-                  said you followed the plan. Take this one with salt — you chose which days to follow, so
+                  said you followed the plan. Take this one with salt. You chose which days to follow, so
                   it&apos;s an association, not a randomized comparison.
                 </p>
               )}

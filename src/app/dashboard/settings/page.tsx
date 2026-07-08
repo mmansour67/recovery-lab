@@ -69,8 +69,8 @@ export default async function SettingsPage() {
               </div>
               <CardDescription className="max-w-prose leading-relaxed">
                 {whoopConnected
-                  ? "Read-only access to recovery, sleep, and cycles — that's the whole scope. Disconnecting revokes it immediately. Results and check-ins you've already generated stay put."
-                  : "No WHOOP linked right now. Experiments need one — the recovery score is the measurement."}
+                  ? "Read access to recovery, sleep, and cycles. That's the whole scope. Disconnecting revokes it immediately, and the results and logs you've already generated stay put."
+                  : "No WHOOP linked right now. Experiments need one, since the recovery score is the measurement."}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -131,13 +131,13 @@ export default async function SettingsPage() {
                 <li className="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
                   <span className="w-32 shrink-0 font-mono text-xs text-primary/80">Experiments</span>
                   <span className="text-muted-foreground">
-                    The habits you tested, each day&apos;s assignment, and your nightly check-ins.
+                    The habits you tested, each day&apos;s assignment, and your nightly logs.
                   </span>
                 </li>
                 <li className="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
                   <span className="w-32 shrink-0 font-mono text-xs text-primary/80">WHOOP records</span>
                   <span className="text-muted-foreground">
-                    Recovery, sleep, and cycle data — only for the days your experiments cover.
+                    Recovery, sleep, and cycle data, only for the days your experiments cover.
                   </span>
                 </li>
               </ul>
@@ -159,9 +159,9 @@ export default async function SettingsPage() {
             <CardHeader>
               <CardTitle className="text-base text-destructive">Delete account</CardTitle>
               <CardDescription className="max-w-prose leading-relaxed">
-                Removes everything listed above — account, experiments, check-ins, synced WHOOP data —
-                and signs you out. No soft delete, no grace period. If you just want WHOOP unlinked,
-                use disconnect instead; it keeps your results.
+                Removes everything listed above and signs you out. Account, experiments, daily logs, synced
+                WHOOP data, all of it. No soft delete, no grace period. If you just want WHOOP
+                unlinked, use disconnect instead, which keeps your results.
               </CardDescription>
             </CardHeader>
             <CardContent>

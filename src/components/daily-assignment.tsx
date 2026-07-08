@@ -32,8 +32,8 @@ export function DailyAssignment({ assignment }: { assignment: TodayAssignment })
 
         {assignment.alreadyCheckedIn ? (
           <div className="flex items-center gap-2.5 rounded-xl border border-primary/25 bg-primary/10 px-4 py-3.5 text-sm">
-            <span className="text-primary">✓</span> Checked in. Tonight&apos;s sleep gets scored against this
-            card — see you tomorrow.
+            <span className="text-primary">✓</span> Logged. Tonight&apos;s sleep gets scored against this
+            card. See you tomorrow.
           </div>
         ) : (
           <div className="border-t pt-6">

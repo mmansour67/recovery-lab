@@ -31,7 +31,7 @@ export function CheckinForm({ experimentDayId }: { experimentDayId: string }) {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="flex items-center gap-2.5 rounded-xl border border-primary/25 bg-primary/10 px-4 py-3.5 text-sm"
       >
-        <span className="text-primary">✓</span> Logged. Honest answers — including &ldquo;no&rdquo; — are
+        <span className="text-primary">✓</span> Logged. Honest answers, including &ldquo;no,&rdquo; are
         what keep the result trustworthy.
       </motion.div>
     );

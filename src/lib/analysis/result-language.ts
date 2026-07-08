@@ -52,9 +52,9 @@ export function computeConfidenceLabel(input: ConfidenceInput): ConfidenceLabel 
 
 const CONFIDENCE_INTERPRETATION: Record<ConfidenceLabel, string> = {
   INSUFFICIENT: "Not enough valid days yet to say anything meaningful. Keep going.",
-  LOW: "An early signal, but the experiment is not yet conclusive.",
-  MODERATE: "Possible benefit, but the experiment is not yet conclusive.",
-  HIGHER: "A consistent signal across a full experiment, though still one person's data.",
+  LOW: "There's an early signal here, but it wouldn't survive a skeptical friend yet.",
+  MODERATE: "This looks like a possible benefit, though the experiment isn't conclusive yet.",
+  HIGHER: "The signal held up across a full experiment. Still one person's data, but it's your data.",
 };
 
 export function confidenceInterpretation(label: ConfidenceLabel): string {
@@ -81,7 +81,7 @@ export function buildResultNarrative(input: ResultNarrativeInput): string {
   const magnitude = Math.abs(Math.round(input.unadjustedEffect * 10) / 10);
 
   return (
-    `On days assigned to "${input.experimentTitle}", your next-morning recovery averaged ` +
+    `On days assigned to "${input.experimentTitle}", your recovery the next morning averaged ` +
     `${magnitude} points ${direction} than on normal days. The estimated range is ` +
     `${formatSigned(input.confidenceIntervalLow)} to ${formatSigned(input.confidenceIntervalHigh)} points ` +
     `across ${input.validDayCount} valid days. ${confidenceInterpretation(input.label)}`

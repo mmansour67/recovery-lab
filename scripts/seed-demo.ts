@@ -79,7 +79,7 @@ async function main() {
     data: {
       userId: user.id,
       title: "No caffeine after 2 p.m.",
-      hypothesis: "Cutting caffeine off at 2 p.m. improves next-morning recovery.",
+      hypothesis: "Cutting caffeine off at 2 p.m. improves recovery the next morning.",
       interventionInstructions: "No caffeine after 2:00 p.m. today. Morning coffee is fine.",
       controlInstructions: "Drink coffee like you normally would. No changes today.",
       startDate,
@@ -109,7 +109,7 @@ async function main() {
         experimentDayId: day.id,
         adherence: condition === "INTERVENTION" ? (i % 5 === 3 ? "PARTIAL" : "YES") : "YES",
         unusualDay: unusual,
-        unusualDayReason: unusual ? "Red-eye flight home" : null,
+        unusualDayReason: unusual ? "Red eye flight home" : null,
       },
     });
 
@@ -163,7 +163,7 @@ async function main() {
         mainSleepId: sleep.id,
         recoveryId: recovery.id,
         validityStatus: unusual ? "INVALID" : "VALID",
-        invalidReason: unusual ? "Red-eye flight home" : null,
+        invalidReason: unusual ? "Red eye flight home" : null,
       },
     });
   }

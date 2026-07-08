@@ -73,8 +73,8 @@ export function RecoveryChart({ data }: { data: ChartPoint[] }) {
         {controlMean !== null && (
           <ReferenceLine y={controlMean} stroke={CONTROL_COLOR} strokeDasharray="5 5" strokeOpacity={0.6} />
         )}
-        <Scatter name="Habit days" data={intervention} fill={INTERVENTION_COLOR} />
-        <Scatter name="Normal days" data={control} fill={CONTROL_COLOR} />
+        <Scatter name="Habit days" data={intervention} fill={INTERVENTION_COLOR} isAnimationActive={false} />
+        <Scatter name="Normal days" data={control} fill={CONTROL_COLOR} isAnimationActive={false} />
       </ScatterChart>
     </ResponsiveContainer>
   );

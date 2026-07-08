@@ -19,7 +19,7 @@ const PRESETS = [
     key: "caffeine",
     emoji: "☕️",
     title: "No caffeine after 2 p.m.",
-    hypothesis: "Cutting caffeine off at 2 p.m. improves next-morning recovery.",
+    hypothesis: "Cutting caffeine off at 2 p.m. improves recovery the next morning.",
     interventionInstructions: "No caffeine after 2:00 p.m. today. Morning coffee is fine.",
     controlInstructions: "Drink coffee like you normally would. No changes today.",
   },
@@ -27,7 +27,7 @@ const PRESETS = [
     key: "phone",
     emoji: "📵",
     title: "Phone outside the bedroom",
-    hypothesis: "Charging the phone outside the bedroom improves next-morning recovery.",
+    hypothesis: "Charging the phone outside the bedroom improves recovery the next morning.",
     interventionInstructions: "Tonight the phone charges outside the bedroom. An alarm clock is allowed.",
     controlInstructions: "Keep the phone wherever it usually lives tonight.",
   },
@@ -35,15 +35,15 @@ const PRESETS = [
     key: "meditation",
     emoji: "🧘",
     title: "Ten minutes of meditation before bed",
-    hypothesis: "A short wind-down meditation improves next-morning recovery.",
+    hypothesis: "Ten quiet minutes before bed improves recovery the next morning.",
     interventionInstructions: "Ten minutes of meditation sometime in the hour before bed.",
-    controlInstructions: "Your usual pre-bed routine, whatever that is tonight.",
+    controlInstructions: "Your usual routine before bed, whatever that is tonight.",
   },
   {
     key: "food",
     emoji: "🍽️",
     title: "No food within three hours of bedtime",
-    hypothesis: "Finishing dinner earlier improves next-morning recovery.",
+    hypothesis: "Finishing dinner earlier improves recovery the next morning.",
     interventionInstructions: "Last bite at least three hours before you plan to sleep.",
     controlInstructions: "Eat on your normal schedule today.",
   },
@@ -89,8 +89,8 @@ export default function NewExperimentPage() {
             Design the <span className="italic text-primary">test</span>
           </h1>
           <p className="max-w-prose text-sm leading-relaxed text-muted-foreground">
-            One habit, tested properly. Chance decides which days are habit days — you just follow the card
-            and check in. Start from a template or write your own.
+            One habit, tested properly. Chance decides which days are habit days. You just follow the card
+            and log what happened. Start from a template or write your own.
           </p>
         </header>
       </Reveal>
@@ -125,8 +125,8 @@ export default function NewExperimentPage() {
           <CardHeader>
             <CardTitle className="text-base">The protocol</CardTitle>
             <CardDescription>
-              Whatever you write below is exactly what your daily card will say — keep it doable on a random
-              Tuesday.
+              Whatever you write below is exactly what your daily card will say, so keep it doable on a
+              random Tuesday.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -221,9 +221,9 @@ export default function NewExperimentPage() {
               </div>
 
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Why at least 14 days? Each condition needs enough nights for an average to mean anything —
-                under about 7 per side, one bad night can swing the whole result. Even numbers keep the split
-                fair.
+                Why at least 14 days? Each condition needs enough nights for an average to mean anything.
+                Under about 7 per side, one bad night can swing the whole result. Even numbers keep the
+                split fair.
               </p>
 
               {state.errors.length > 0 && (
