@@ -82,7 +82,7 @@ export function buildResultNarrative(input: ResultNarrativeInput): string {
 
   return (
     `On days assigned to "${input.experimentTitle}", your next-morning recovery averaged ` +
-    `${magnitude} points ${direction} than on control days. The estimated range is ` +
+    `${magnitude} points ${direction} than on normal days. The estimated range is ` +
     `${formatSigned(input.confidenceIntervalLow)} to ${formatSigned(input.confidenceIntervalHigh)} points ` +
     `across ${input.validDayCount} valid days. ${confidenceInterpretation(input.label)}`
   );
