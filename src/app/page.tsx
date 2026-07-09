@@ -62,17 +62,18 @@ export default function Home() {
 
             <Reveal delay={0.08}>
               <h1 className="max-w-3xl text-balance font-display text-5xl leading-[1.04] tracking-tight sm:text-7xl">
-                You think the late coffee is wrecking your recovery.
+                Some habit is shaping your recovery.
                 <br />
-                <span className="italic text-primary">Prove it.</span>
+                <span className="italic text-primary">Test it properly.</span>
               </h1>
             </Reveal>
 
             <Reveal delay={0.16}>
               <p className="mt-7 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-                Recovery Lab turns one habit into a real randomized experiment. Some days you do it, some
-                days you don&apos;t, and chance decides which. After a few weeks your WHOOP data tells you
-                whether it actually mattered.
+                The late coffee. The phone on the nightstand. The dinner at ten. Recovery Lab turns any one
+                of them into a real randomized experiment: some days you do it, some days you don&apos;t,
+                and chance decides which. After a few weeks your WHOOP data tells you whether it actually
+                mattered.
               </p>
             </Reveal>
 
