@@ -12,7 +12,7 @@ export function GradientOrbs({ className }: { className?: string }) {
       <div
         className="absolute -top-24 left-[8%] size-[26rem] rounded-full opacity-60 blur-3xl"
         style={{
-          background: "radial-gradient(circle, oklch(0.55 0.14 35 / 0.13), transparent 70%)",
+          background: "radial-gradient(circle, oklch(0.45 0.075 60 / 0.13), transparent 70%)",
           animation: "drift-a 26s ease-in-out infinite",
         }}
       />
@@ -56,7 +56,7 @@ export function PulseWave({ className }: { className?: string }) {
         style={{
           strokeDasharray: 480,
           animation: "pulse-draw 5.5s cubic-bezier(0.4, 0, 0.2, 1) infinite",
-          filter: "drop-shadow(0 1px 4px oklch(0.55 0.14 35 / 0.35))",
+          filter: "drop-shadow(0 1px 4px oklch(0.45 0.075 60 / 0.35))",
         }}
       />
     </svg>

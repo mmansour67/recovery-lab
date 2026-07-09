@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BrandWordmark } from "@/components/brand";
 import { GradientOrbs, PulseWave, WeekStrip, LiveDot } from "@/components/graphics";
-import { Whoop3DLazy } from "@/components/whoop-3d-lazy";
 import { Reveal, Stagger, StaggerItem, SignedCountUp } from "@/components/motion";
 import { RecoveryRing } from "@/components/recovery-ring";
 import { InfoTip } from "@/components/info-tip";
@@ -53,44 +52,36 @@ export default function Home() {
         {/* Hero */}
         <section className="mesh-bg relative">
           <GradientOrbs />
-          <div className="relative mx-auto max-w-5xl px-6 pb-24 pt-10 sm:pt-14">
-            <div className="grid items-center gap-10 lg:grid-cols-[1fr_18rem]">
-              <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-                <Reveal>
-                  <Badge variant="outline" className="mb-8 gap-2 border-primary/30 py-1 font-mono text-[0.7rem] text-muted-foreground">
-                    <LiveDot />
-                    n = 1 · your data, your call
-                  </Badge>
-                </Reveal>
+          <div className="relative mx-auto flex max-w-5xl flex-col items-center px-6 pb-24 pt-14 text-center sm:pt-20">
+            <Reveal>
+              <Badge variant="outline" className="mb-8 gap-2 border-primary/30 py-1 font-mono text-[0.7rem] text-muted-foreground">
+                <LiveDot />
+                n = 1 · your data, your call
+              </Badge>
+            </Reveal>
 
-                <Reveal delay={0.08}>
-                  <h1 className="max-w-3xl text-balance font-display text-5xl leading-[1.04] tracking-tight sm:text-6xl">
-                    You think the late coffee is wrecking your recovery.{" "}
-                    <span className="italic text-primary">Prove it.</span>
-                  </h1>
-                </Reveal>
+            <Reveal delay={0.08}>
+              <h1 className="max-w-3xl text-balance font-display text-5xl leading-[1.04] tracking-tight sm:text-7xl">
+                You think the late coffee is wrecking your recovery.
+                <br />
+                <span className="italic text-primary">Prove it.</span>
+              </h1>
+            </Reveal>
 
-                <Reveal delay={0.16}>
-                  <p className="mt-7 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-                    Recovery Lab turns one habit into a real randomized experiment. Some days you do it,
-                    some days you don&apos;t, and chance decides which. After a few weeks your WHOOP data
-                    tells you whether it actually mattered.
-                  </p>
-                </Reveal>
+            <Reveal delay={0.16}>
+              <p className="mt-7 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
+                Recovery Lab turns one habit into a real randomized experiment. Some days you do it, some
+                days you don&apos;t, and chance decides which. After a few weeks your WHOOP data tells you
+                whether it actually mattered.
+              </p>
+            </Reveal>
 
-                <Reveal delay={0.24}>
-                  <div className="mt-9 flex items-center gap-3">
-                    <Button size="lg" render={<Link href="/login">Run the experiment</Link>} />
-                    <Button size="lg" variant="ghost" render={<a href="#how-it-works">See how it works</a>} />
-                  </div>
-                </Reveal>
+            <Reveal delay={0.24}>
+              <div className="mt-9 flex items-center gap-3">
+                <Button size="lg" render={<Link href="/login">Run the experiment</Link>} />
+                <Button size="lg" variant="ghost" render={<a href="#how-it-works">See how it works</a>} />
               </div>
-
-              {/* The strap itself, doing its thing */}
-              <Reveal delay={0.2} className="hidden justify-center lg:flex">
-                <Whoop3DLazy className="h-[26rem] w-72" />
-              </Reveal>
-            </div>
+            </Reveal>
 
             {/* Example result card */}
             <Reveal delay={0.34} className="mx-auto mt-16 w-full max-w-2xl">
